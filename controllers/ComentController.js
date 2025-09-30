@@ -1,7 +1,8 @@
-const Coment = require("../models/comentsModel")
+const Coment = require("../models/ComentsModel")
 const Task = require("../models/TaskModel")
 const User = require("../models/UserModel")
 
+//new Comment
 exports.newComment=async(req,res)=>{
     try{
     const userValidate= await User.findByPk(req.body.user_id);
@@ -26,5 +27,30 @@ exports.getComents=async(req,res)=>{
         res.status(200).json(list);
     }catch(e){
        res.status(500).json({error:"Error interno",messa:e.message});
+    }
+}
+
+//update coment
+exports.updateComent=async(req,res)=>{
+    try {
+        const data= await Coment.findByPk(req.params.id);
+        if(!data) return res.status(404).json({error:"Task not found"});
+        await data.update({content:req.body.content});
+        res.json(data);
+    } catch (error) {
+          res.status(500).json({error:"Error al actualizar el comentario"});
+    }
+}
+
+
+//delete coment
+exports.deleteComent=async(req,res)=>{
+    try {
+        const data= await Coment.findByPk(req.params.id);
+        if(!data) return res.status(404).json({error:"Task not found"});
+        await data.destroy();
+        res.json({"Comentario eliminado":data.body.id});
+    } catch (error) {
+        res.status(500).json({error:"Error al eliminar el comentario"});
     }
 }

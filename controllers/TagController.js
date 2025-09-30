@@ -21,6 +21,32 @@ exports.getAllTags=async(req,res)=>{
    }
 }
 
+//get one tag
+exports.oneTag=async (req,res) => {
+   try {
+      const data = await Tag.findByPk(req.params.id);
+      if(!data)return res.status(404).json({error:"Task not found"});
+      res.json(data);
+
+   } catch (error) {
+      res.status(500).json({error:"Internal Server error"});
+   }
+}
+
+//update tag
+exports.updateTag=async (req,res) => {
+   try {
+      const data = await Tag.findByPk(req.params.id);
+      if(!data)return res.status(404).json({error:"Task not found"});
+      
+      await data.update(req.body);
+      res.json(date);
+      
+   } catch (error) {
+      res.status(500).json({error:"Internal Server error"});
+   }
+}
+
 
 //drop tag
 exports.dropTag=async(req,res)=>{
