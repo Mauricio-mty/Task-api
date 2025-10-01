@@ -9,20 +9,6 @@ const coment=require("./routes/ComentRoutes");
 const app = express();
 app.use(express.json());
 
-//conexion a bd
-sequelize.authenticate()
-    .then(()=>console.log("Conectado"))
-    .catch(e=>console.error("No conectado",e));
-//union con bd
-
-sequelize.sync({force:false})//force: true borra y recrea tablas
-    .then(()=>{
-        console.log("Tabla sincronizada");
-    })
-    .catch(err=>{
-        console.error("No se pudo sincronizar:",err);
-    });
-
 /*app.get("/",(req,res)=>{
     res.send("Api on air");
 });*/
@@ -32,5 +18,24 @@ app.use("/user",user);
 app.use("/tag",tag);
 app.use("/coment",coment)
 
-app.listen(3030,()=>console.log("Servidor en puerto 3030"));
+// Function to initialize database
+const initDB = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log("Conectado");
+        await sequelize.sync({force:false});
+        console.log("Tabla sincronizada");
+    } catch (err) {
+        console.error("Error initializing DB:", err);
+    }
+};
+
+// Only start server if not in test environment
+if (process.env.NODE_ENV !== 'test') {
+    initDB().then(() => {
+        app.listen(3030,()=>console.log("Servidor en puerto 3030"));
+    });
+}
+
+module.exports = app;
 
