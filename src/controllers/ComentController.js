@@ -1,5 +1,5 @@
-const Coment = require("../models/ComentsModel")
-const Task = require("../models/TaskModel")
+const Coment = require("../models/ComentsModel");
+const Task = require("../models/TaskModel");
 const User = require("../models/UserModel")
 
 //new Comment

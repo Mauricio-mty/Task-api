@@ -1,7 +1,7 @@
 //Model to bd postgresql
 
 const {DataTypes}=require("sequelize");
-const sequelize=require("../db");
+const sequelize=require("../config/db");
 const {v4:uuidv4}=require("uuid");
 
     const Task = sequelize.define("task",{

@@ -5,7 +5,8 @@
   "main": "-y",
   "scripts": {
     "test": "jest --coverage",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -17,14 +18,20 @@
   "author": "-y",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.3",
     "nodemon": "^3.1.10",
     "pg": "^8.16.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
-    "uuid": "^3.4.0"
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "babel-jest": "^30.2.0",
     "jest": "^30.2.0",
     "supertest": "^7.1.4"
   }

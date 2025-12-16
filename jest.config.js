@@ -3,8 +3,10 @@ module.exports={
     testMatch:['**/_test_/**/*.js','**/?(*.)+(spec|test).js'],//defien patrones de archivos quqe jest buscara para ejecutar (_test_,.spec.js,.test.js)
     collectCoverage:true,//Al ejecutar las pruebas se debe monitorear el codigo de la app,determinando que lineas funcionan  y han sido ejecutadas por alguna prueba
     coverageDirectory:'coverage',//Indica dodne guardar los resultados de la cobertura que se acaban de calcular
-
+    transform: {
+        "^.+\\.[t|j]sx?$": "babel-jest" // transforma JS y JSX usando babel-jest
+    },
     transformIgnorePatterns: [
-        'node_modules/(?!uuid)'
-    ]
+         "/node_modules/(?!uuid)"
+    ],
 }

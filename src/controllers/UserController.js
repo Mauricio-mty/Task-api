@@ -1,16 +1,15 @@
-const User = require("../models/UserModel");
+const User = require("../service/UserService");
 
 //new user function
-exports.NewUser=async(req,res)=>{
+exports.create=async(req,res)=>{
     try{
-      const new_user= await User.create(req.body);
+      const new_user= await User.creatreUser(req.body);
       res.status(201).json(new_user);
-
     }catch(e){
       res.status(500).json({error:e.message});
     }
 }
-
+/*
 //get all users
 exports.getAllUsers=async(req,res)=>{
     try{
@@ -56,4 +55,4 @@ exports.deleteUser=async (req,res) => {
   } catch (error) {
     res.status(500).json({error:"Internal server error",m:error.Message});
   }
-}
+}*/
