@@ -9,6 +9,7 @@ exports.create=async(req,res)=>{
       res.status(500).json({error:e.message});
     }
 }
+
 /*
 //get all users
 exports.getAllUsers=async(req,res)=>{
