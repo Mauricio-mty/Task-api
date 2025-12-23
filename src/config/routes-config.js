@@ -5,8 +5,10 @@ const task= require("../routes/TaskRoutes");
 const user = require("../routes/UserRoutes");
 const tag = require("../routes/TagRoutes");
 const coment=require("../routes/ComentRoutes");
+const corsM = require("../middleware/cors");
 
 const configRoutes=(app)=>{
+    app.use(corsM);
     app.use(express.json());
 
     app.use("/login",Login);

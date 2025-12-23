@@ -3,7 +3,10 @@ const sequelize=require("./src/config/db");
 require("./src/models/associations");//Importacion
 const configRoutes=require("./src/config/routes-config");
 const app = express();
+
+
 configRoutes(app);
+
 
 // Function to initialize database
 const initDB = async () => {
@@ -20,7 +23,7 @@ const initDB = async () => {
 // Only start server if not in test environment
 if (process.env.NODE_ENV !== 'test') {
     initDB().then(() => {
-        app.listen(3030,()=>console.log("Servidor en puerto 3030"));
+        app.listen(3030,'0.0.0.0',()=>console.log("Servidor en puerto 3030"));
     });
 }
 
