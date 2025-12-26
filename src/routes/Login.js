@@ -1,14 +1,15 @@
 const express = require('express');
+const validate = require('../middleware/validate');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const authMiddleware = require('../middleware/authMiddleware');
-
+const loginSchema = require('../schema/Login.schema');
 /**
  * @route   POST /login
  * @desc    Autentica a un usuario y le devuelve un token JWT.
  * @access  Public
  */
-router.post('/', authController.login);
+router.post('/', validate(loginSchema),authController.login);
 
 /**
  * @route   POST /login/verify

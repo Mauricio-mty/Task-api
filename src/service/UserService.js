@@ -17,7 +17,7 @@ UserService.creatreUser = async (userData) => {
     }
 }
 
-
+//Function to found user by email , return element of db 
 UserService.getUserByEmail= async(email)=>{
     try{
         const user = await User.findOne({where:{email}});
