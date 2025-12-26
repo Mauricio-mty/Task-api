@@ -21,7 +21,7 @@ UserService.creatreUser = async (userData) => {
 UserService.getUserByEmail= async(email)=>{
     try{
         const user = await User.findOne({where:{email}});
-        if(!user) return resizeBy.status(404).json({message:"User not found"}); 
+        if(!user) return res.status(404).json({message:"User not found"}); 
         return user;
     }catch(e){
         res.status(500).json({error:e.message});

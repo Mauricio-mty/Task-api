@@ -7,6 +7,9 @@ const LoginSchema = z.object({
         .min(1,"Email is required")
         .toLowerCase(),
     password_hash:z.string()
+    .trim()
          .min(1,"Password is required")
          .max(25,"Password must be at most 25 characters long")       
 });
+
+module.exports = LoginSchema;

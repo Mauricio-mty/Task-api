@@ -9,7 +9,7 @@ const loginSchema = require('../schema/Login.schema');
  * @desc    Autentica a un usuario y le devuelve un token JWT.
  * @access  Public
  */
-router.post('/', validate(loginSchema),authController.login);
+router.post('/',validate(loginSchema),authController.login);
 
 /**
  * @route   POST /login/verify
