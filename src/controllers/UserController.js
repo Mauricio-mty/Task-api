@@ -49,8 +49,8 @@ exports.updateUser=async (req,res) => {
 //delete user
 exports.deleteUser=async (req,res) => {
     try{
-      const delete_user = await User.delete(req.params.id);
-      res.status(201).json(delete_user);
+      const delete_user = await User.deleteRegister(req.params.id);
+      res.status(204).json();
     }catch(e){
       res.status(500).json({error:e.message});
     }

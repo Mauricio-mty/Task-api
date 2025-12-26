@@ -37,14 +37,18 @@ UserService.AllUsers=async()=>{
     }
 }
 
-UserService.delete=async(id_User)=>{
+UserService.deleteRegister=async(id_User)=>{
     try {
         const user=await User.findByPk(id_User);
-        if(!user) return res.status(404).json({Message:"Usuario no encontrado"});
-        await data.destroy();
-        res.json({"User eliminado":user.body.id});
+        if(!user) {
+            throw new Error("User not found");
+        }
+        const deleteUser=user.get({plain:true});
+        await user.destroy();
+        res.json({"User eliminado":deleteUser});
     } catch (error) {
-        res.status(500).json({error:"Internal server error",m:error.Message});
+        console.error("Error deleting user:", error);
+        throw new Error("Error deleting user");
     }
 }
 
