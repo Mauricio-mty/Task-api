@@ -10,18 +10,18 @@ exports.create=async(req,res)=>{
     }
 }
 
-/*
+
 //get all users
 exports.getAllUsers=async(req,res)=>{
     try{
-       const data= await User.findAll();
+       const data= await User.AllUsers();
        res.json(data);
     }catch(e){
-        res.status(500).json({error:"Internal server Error",ex:e.message});
+        res.status(500).json({ex:e.message});
     }
 }
 
-
+/*
 //get one user
 exports.getByid=async(req,res)=>{
   try {
@@ -45,15 +45,13 @@ exports.updateUser=async (req,res) => {
   }
 }
 
-
+*/
 //delete user
 exports.deleteUser=async (req,res) => {
-  try {
-    const data= await User.findByPk(req.params.id);
-    if(!data)return res.status(404).json({Message:"Usuario no encontrado"});
-   await data.destroy();
-    res.json({"User eliminado":data.body.id});
-  } catch (error) {
-    res.status(500).json({error:"Internal server error",m:error.Message});
-  }
-}*/
+    try{
+      const delete_user = await User.delete(req.params.id);
+      res.status(201).json(delete_user);
+    }catch(e){
+      res.status(500).json({error:e.message});
+    }
+}
