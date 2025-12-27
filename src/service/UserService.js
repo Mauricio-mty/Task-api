@@ -69,18 +69,18 @@ UserService.updateUser=async(id_User,updateData)=>{
 //Delete function
 UserService.deleteRegister=async(id_User)=>{
     try {
-        const user=await User.findByPk(id_User);
-        if(!user) {
-            throw new Error("User not found");
-        }
-        const deleteUser=user.get({plain:true});
-        await user.destroy();
-        res.json({"User eliminado":deleteUser});
-    } catch (error) {
-        console.error("Error deleting user:", error);
-        throw new Error("Error deleting user");
-    }
-}
+            const user=await User.findByPk(id_User);
+                    if(!user) {
+                                throw new Error("User not found");
+                                        }
+                                                const deleteUser=user.get({plain:true});
+                                                        await user.destroy();
+                                                                res.json({"User eliminado":deleteUser});
+                                                                    } catch (error) {
+                                                                            console.error("Error deleting user:", error);
+                                                                                    throw new Error("Error deleting user");
+                                                                                        }
+                                                                                        }
 
 
 module.exports = UserService;
