@@ -1,10 +1,10 @@
-const Tag = require("../models/TagModel");
+const Tag = require("../service/TagService");
 
 //new tag
 exports.newTag=async(req,res)=>{
     try{
-       const new_tag= await Tag.create(req.body);
-       res.status(201).json(new_tag);
+      const new_tag= await Tag.createTag(req.body);
+      res.status(201).json(new_tag);
     }catch(e){
          res.status(500).json({error:e.message});
     }
@@ -13,9 +13,10 @@ exports.newTag=async(req,res)=>{
 
 //list tags
 exports.getAllTags=async(req,res)=>{
-   try {
-    const list= await Tag.findAll();
-    res.json(list);
+   try { 
+      const data= await Tag.getAll();
+      res.json(data);
+   
    } catch (error) {
     res.status(500).json({error:"Internal Server error"});
    }
@@ -24,9 +25,9 @@ exports.getAllTags=async(req,res)=>{
 //get one tag
 exports.oneTag=async (req,res) => {
    try {
-      const data = await Tag.findByPk(req.params.id);
-      if(!data)return res.status(404).json({error:"Task not found"});
-      res.json(data);
+      const data= await Tag.getOneTag(req.params.id);
+      res.status(200).json(data);
+      
 
    } catch (error) {
       res.status(500).json({error:"Internal Server error"});
@@ -36,12 +37,9 @@ exports.oneTag=async (req,res) => {
 //update tag
 exports.updateTag=async (req,res) => {
    try {
-      const data = await Tag.findByPk(req.params.id);
-      if(!data)return res.status(404).json({error:"Task not found"});
       
-      await data.update(req.body);
-      res.json(date);
-      
+      const updatedTag= await Tag.updateTag(req.params.id,req.body);
+      res.status(200).json(updatedTag);
    } catch (error) {
       res.status(500).json({error:"Internal Server error"});
    }
@@ -51,10 +49,9 @@ exports.updateTag=async (req,res) => {
 //drop tag
 exports.dropTag=async(req,res)=>{
    try{
-      const to_drop = await Tag.findByPk(req.params.id);
-      if(!to_drop)return res.status(404).json({message:"Etiqueta no encontrada"});
-      await to_drop.destroy();
-      res.status(204).json({message:"etiqueta eliminada",to_drop});
+
+      const deletedTag = await Tag.deleteTag(req.params.id);
+      res.status(204).json(deletedTag);
    }catch(e){ 
       res.status(500).json({message:"Error al eliminar",error:e.message});
    }
