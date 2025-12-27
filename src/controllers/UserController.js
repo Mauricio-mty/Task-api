@@ -21,31 +21,29 @@ exports.getAllUsers=async(req,res)=>{
     }
 }
 
-/*
+
 //get one user
 exports.getByid=async(req,res)=>{
   try {
-    const data=await User.findByPk(req.params.id);
-    if(!data)return res.status(404).json({Message:"Usuario no encontrado"});
-    res.json(data);
+    const data=await User.getOneUser(req.params.id);
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json({error:error.message});
   }
 }
 
-///update user
+//update user
 exports.updateUser=async (req,res) => {
   try {
-    const data=await User.findByPk(req.params.id);
-    if(!data)return res.status(404).json({Message:"Usuario no encontrado"});
-    await data.update(req.body);
-    res.json(data);
+    const{id,...rest}=req.params;
+    const updatedUser = await User.updateUser(id,req.body);
+    res.status(200).json(updatedUser);
   } catch (error) {
-       res.status(500).json({error:e.message});
+       res.status(500).json({error:error.message});
   }
 }
 
-*/
+
 //delete user
 exports.deleteUser=async (req,res) => {
     try{

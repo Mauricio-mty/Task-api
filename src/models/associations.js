@@ -1,4 +1,4 @@
-const Coment = require("./comentsModel")
+const Coment = require("./ComentsModel")
 const Task = require("./TaskModel")
 const User = require("./UserModel")
 

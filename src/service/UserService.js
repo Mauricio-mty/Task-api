@@ -28,6 +28,17 @@ UserService.getUserByEmail= async(email)=>{
     }
 }
 
+UserService.getOneUser= async(id)=>{
+    try {
+        const data = await User.findByPk(id);
+        return {message:"User found",data};
+    } catch (error) {
+        throw new Error("Error retrieving user");
+        //res.status(500).json({error:e.message});
+    }
+}
+
+//Get all users functions
 UserService.AllUsers=async()=>{
     try {
         const data = await User.findAll();
@@ -37,6 +48,25 @@ UserService.AllUsers=async()=>{
     }
 }
 
+UserService.updateUser=async(id_User,updateData)=>{
+    try {
+        const user = await User.findByPk(id_User);    
+        if(!user){throw new Error("User not found");}
+
+        if(updateData.password_hash){
+            updateData.password_hash= await bcrypt.hash(updateData.password_hash,12);
+        }
+
+        await user.update(updateData);
+        return user;
+        
+    }catch (error) {
+        console.error("Error updating user:", error);
+        throw new Error("Error updating user");
+    }
+}
+
+//Delete function
 UserService.deleteRegister=async(id_User)=>{
     try {
         const user=await User.findByPk(id_User);
