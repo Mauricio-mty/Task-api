@@ -1,56 +1,48 @@
-const Coment = require("../models/ComentsModel");
-const Task = require("../models/TaskModel");
-const User = require("../models/UserModel")
+const ComentService = require('../service/ComentService');
 
-//new Comment
-exports.newComment=async(req,res)=>{
-    try{
-    const userValidate= await User.findByPk(req.body.user_id);
-    const taskValidate=await Task.findByPk(req.body.task_id);
-    
-    if(!userValidate)return res.status(404).json({message:"Usuario no encontrado"});
-    if(!taskValidate)return res.status(404).json({message:"Tarea no encontrada"});
-    const coment=await Coment.create(req.body);
-    res.status(201).json(coment);    
-
-    }catch(e){
-       res.status(500).json({error:"Error al crear el comentario"});
-    }
-}
-
-
-
-//all coments
-exports.getComents=async(req,res)=>{
-    try{
-        const list= await Coment.findAll();
-        res.status(200).json(list);
-    }catch(e){
-       res.status(500).json({error:"Error interno",messa:e.message});
-    }
-}
-
-//update coment
-exports.updateComent=async(req,res)=>{
+// Create a new comment
+exports.newComment = async (req, res) => {
     try {
-        const data= await Coment.findByPk(req.params.id);
-        if(!data) return res.status(404).json({error:"Task not found"});
-        await data.update({content:req.body.content});
+        const comment = await ComentService.createComment(req.body);
+        res.status(201).json(comment);
+    } catch (e) {
+        // Personalizar el mensaje de error basado en el tipo de error
+        if (e.message === "User not found" || e.message === "Task not found") {
+            return res.status(404).json({ message: e.message });
+        }
+        res.status(500).json({ error: "Error creating the comment" });
+    }
+};
+
+// Get all comments
+exports.getComents = async (req, res) => {
+    try {
+        const list = await ComentService.getAllComments();
+        res.status(200).json(list);
+    } catch (e) {
+        res.status(500).json({ error: "Internal error", message: e.message });
+    }
+};
+
+// Update a comment
+exports.updateComent = async (req, res) => {
+    try {
+        const data = await ComentService.updateComment(req.params.id, req.body.content);
+        if (!data) return res.status(404).json({ error: "Comment not found" });
         res.json(data);
     } catch (error) {
-          res.status(500).json({error:"Error al actualizar el comentario"});
+        res.status(500).json({ error: "Error updating the comment" });
     }
-}
+};
 
-
-//delete coment
-exports.deleteComent=async(req,res)=>{
+// Delete a comment
+exports.deleteComent = async (req, res) => {
     try {
-        const data= await Coment.findByPk(req.params.id);
-        if(!data) return res.status(404).json({error:"Task not found"});
-        await data.destroy();
-        res.json({"Comentario eliminado":data.body.id});
+        const data = await ComentService.deleteComment(req.params.id);
+        if (!data) return res.status(404).json({ error: "Comment not found" });
+        // El servicio ya devuelve el formato correcto
+        res.json(data);
     } catch (error) {
-        res.status(500).json({error:"Error al eliminar el comentario"});
+        res.status(500).json({ error: "Error deleting the comment" });
     }
-}
+};
