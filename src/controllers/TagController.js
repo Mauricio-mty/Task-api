@@ -51,7 +51,7 @@ exports.dropTag=async(req,res)=>{
    try{
 
       const deletedTag = await Tag.deleteTag(req.params.id);
-      res.status(204).json(deletedTag);
+      res.status(200).json(deletedTag);
    }catch(e){ 
       res.status(500).json({message:"Error al eliminar",error:e.message});
    }
