@@ -6,6 +6,7 @@ const task = require("../routes/TaskRoutes");
 const user = require("../routes/UserRoutes");
 const tag = require("../routes/TagRoutes");
 const coment = require("../routes/ComentRoutes");
+const role = require("../routes/UserRoleRoutes");   
 
 // Importación de middlewares
 const corsM = require("../middleware/cors");

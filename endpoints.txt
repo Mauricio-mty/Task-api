@@ -1,0 +1,32 @@
+# API Endpoints
+
+## Login (Public)
+- POST /login
+- POST /login/verify
+
+## Task (Protected)
+- GET /task
+- POST /task
+- GET /task/:id
+- PUT /task/:id
+- DELETE /task/:id
+
+## User (Protected)
+- POST /user
+- GET /user
+- GET /user/:id
+- PUT /user/:id
+- DELETE /user/:id
+
+## Tag (Protected)
+- POST /tag
+- GET /tag
+- GET /tag/:id
+- PUT /tag/:id
+- DELETE /tag/:id
+
+## Coment (Protected)
+- POST /coment
+- GET /coment
+- PUT /coment/:id
+- DELETE /coment/:id

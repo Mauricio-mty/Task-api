@@ -147,4 +147,12 @@ El proyecto sigue una arquitectura en capas bien definida, lo que facilita la se
 | `PUT` | `/:id` | Actualiza un comentario por su ID. | Privado |
 | `DELETE`| `/:id` | Elimina un comentario por su ID. | Privado |
 
-**Nota:** La ruta `GET /coment/:id` estaba incorrectamente configurada para actualizar un comentario. Se ha corregido a `PUT /coment/:id` para seguir las convenciones REST. El endpoint `GET /coment/:id` ahora recupera un comentario por su ID.
+### Roles de Usuario (`/role`)
+
+| Método | Ruta | Descripción | Acceso |
+| --- | --- | --- | --- |
+| `POST` | `/` | Crea un nuevo rol. | Privado |
+| `GET` | `/` | Obtiene todos los roles. | Privado |
+| `GET` | `/:id` | Obtiene un rol por su ID. | Privado |
+| `PUT` | `/:id` | Actualiza el estado de un rol. | Privado |
+| `DELETE`| `/:id` | Elimina un rol por su ID. | Privado |
