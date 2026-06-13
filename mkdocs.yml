@@ -1,0 +1,32 @@
+site_name: Guía de Desarrollo Ágil
+theme:
+  name: material
+  language: es
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+nav:
+  - Inicio: index.md
+  - Instalación: instalacion.md
+  - Uso Básico: uso.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences
+  - tables
+  - attr_list
+  - md_in_html
+
