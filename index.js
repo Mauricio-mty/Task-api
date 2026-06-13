@@ -3,8 +3,8 @@ const sequelize=require("./src/config/db");
 require("./src/models/associations");//Importacion
 const configRoutes=require("./src/config/routes-config");
 const app = express();
-
-
+const {ensureAdminRole}=require("./src/config/seedRoles");
+const {firstUser}=require("./src/config/seedAdminUser");
 configRoutes(app);
 
 
@@ -15,6 +15,9 @@ const initDB = async () => {
         console.log("Conectado");
         await sequelize.sync({force:false});
         console.log("Tabla sincronizada");
+
+        await ensureAdminRole();
+        await firstUser();
     } catch (err) {
         console.error("Error initializing DB:", err);
     }

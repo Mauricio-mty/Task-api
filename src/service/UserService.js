@@ -20,11 +20,11 @@ UserService.creatreUser = async (userData) => {
 //Function to found user by email , return element of db 
 UserService.getUserByEmail= async(email)=>{
     try{
-        const user = await User.findOne({where:{email}});
-        if(!user) return res.status(404).json({message:"User not found"}); 
-        return user;
+        const user = await User.findOne({where:{email:email}}); 
+        return {user};
     }catch(e){
-        res.status(500).json({error:e.message});
+        console.error("Error retrieving user by email:", e);
+      throw new Error("Error retrieving user by email");
     }
 }
 

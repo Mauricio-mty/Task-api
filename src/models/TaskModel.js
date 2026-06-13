@@ -2,6 +2,7 @@
 
 const {DataTypes}=require("sequelize");
 const sequelize=require("../config/db");
+const tag = require("./TagModel");
 const {v4:uuidv4}=require("uuid");
 
     const Task = sequelize.define("task",{
