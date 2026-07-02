@@ -7,7 +7,7 @@ const app = express();
 
 configRoutes(app);
 
-
+//comentario de prueba
 // Function to initialize database
 const initDB = async () => {
     try {
